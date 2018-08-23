@@ -15,7 +15,7 @@ generate(
 			googleFont("Roboto Slab"),
 			googleFont("Nunito Sans"),
 			googleFont("Varela Round"),
-			"animate.min.css",
+			"main.css",
 			"https://use.fontawesome.com/releases/v5.0.13/css/all.css"
 		],
 		scripts = [],

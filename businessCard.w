@@ -16,11 +16,31 @@ let businessCard = div(
 		"border-radius: 5px",
 		"z-index: 500"
 	],
-	content =
-		div(
-			content = div(
-				content = img(
-				)
+	content = div(
+		styles = [
+			"display: table-cell",
+			"vertical-align: baseline"
+		],
+		content = div(
+			uniqueId = "portrait",
+			styles = [
+				"width: 220px",
+				"height: 220px",
+				"overflow: hidden",
+				"display: inline-block",
+				"margin-right: 20px"
+			],
+			content = img(
+				styles = [
+					"height: inherit",
+					"width: inherit",
+					"object-fit: cover",
+					"border-radius: 10px"
+				],
+				attributes = [
+					src("portrait.png")
+				]
 			)
 		)
+	)
 );

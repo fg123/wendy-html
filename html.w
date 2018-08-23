@@ -20,7 +20,7 @@ Context.init => (stub) {
 
 let createAttributeStruct => (name) {
 	struct aStruct => (value) [generateString];
-	aStruct.generateString => () ret name + "='" + value + "'";
+	aStruct.generateString => () ret name + "='" + this.value + "'";
 	ret aStruct;
 };
 
@@ -49,7 +49,7 @@ let createHTMLStruct => (tagName) {
 			context.css += "." + this.id + " {\n";
 			for style in this.styles
 				// Automatically append semi-colon too!
-				context.css += style + ";\n";
+				context.css += "\t" + style + ";\n";
 			context.css += "}\n\n";
 		}
 
