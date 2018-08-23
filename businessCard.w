@@ -1,6 +1,95 @@
 import html;
+import list;
 
-let businessCard = div(
+let portrait => (portraitPicture) div(
+	styles = [
+		"display: table-cell",
+		"vertical-align: baseline"
+	],
+	content = div(
+		uniqueId = "portrait",
+		styles = [
+			"width: 220px",
+			"height: 220px",
+			"overflow: hidden",
+			"display: inline-block",
+			"margin-right: 20px"
+		],
+		content = img(
+			styles = [
+				"height: inherit",
+				"width: inherit",
+				"object-fit: cover",
+				"border-radius: 10px"
+			],
+			attributes = [
+				src(portraitPicture)
+			]
+		)
+	)
+);
+
+let cardInfo => (name, skills, items) div(
+	styles = [
+		"display: table-cell",
+		"vertical-align: top"
+	],
+	content = [
+		h1(
+			styles = [
+				"font-family: 'Roboto Slab', serif",
+				"font-size: 48px",
+				"letter-spacing: 3px",
+				"color: #212121",
+				"font-weight: bold",
+				"text-transform: uppercase",
+				"margin: 0px"
+			],
+			content = name
+		),
+		div(
+			uniqueId = "description-wrapper",
+			styles = ["overflow: hidden"],
+			content = [
+				div(
+					uniqueId = "subnote",
+					styles = [
+						"font-size: 13px",
+						"color: #888"
+					],
+					content = [
+						i(content=skills),
+						table(
+							uniqueId = "portfolio-description",
+							content = map(#:(item)
+								tr(
+									content = [
+										td(
+											content = [
+												i(
+													uniqueId = item.icon,
+													attributes = [
+														ariaHidden("true")
+													]
+												)
+											]
+										),
+										td(
+											content = item.value
+										)
+									]
+								), items)
+						)
+					]
+				)
+			]
+		)
+	]
+);
+
+struct CardEntry => (icon, value);
+
+let businessCard => (name, portraitPicture, skills, items) div(
 	uniqueId = "businessCard",
 	styles = [
 		"display: table",
@@ -16,31 +105,5 @@ let businessCard = div(
 		"border-radius: 5px",
 		"z-index: 500"
 	],
-	content = div(
-		styles = [
-			"display: table-cell",
-			"vertical-align: baseline"
-		],
-		content = div(
-			uniqueId = "portrait",
-			styles = [
-				"width: 220px",
-				"height: 220px",
-				"overflow: hidden",
-				"display: inline-block",
-				"margin-right: 20px"
-			],
-			content = img(
-				styles = [
-					"height: inherit",
-					"width: inherit",
-					"object-fit: cover",
-					"border-radius: 10px"
-				],
-				attributes = [
-					src("portrait.png")
-				]
-			)
-		)
-	)
+	content = [portrait(portraitPicture), cardInfo(name, skills, items)]
 );

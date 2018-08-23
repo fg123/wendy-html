@@ -44,7 +44,7 @@ let createHTMLStruct => (tagName) {
 		let tag = "<" + tagName + ":" + this.id + ">";
 		"Building CSS for " + tag;
 
-		if !(this.id ~ context.alreadyGeneratedCss) {
+		if !(this.id ~ context.alreadyGeneratedCss) and this.styles.size > 0{
 			context.alreadyGeneratedCss += this.id;
 			context.css += "." + this.id + " {\n";
 			for style in this.styles
@@ -116,8 +116,20 @@ let div = createHTMLStruct("div");
 let span = createHTMLStruct("span");
 let p = createHTMLStruct("p");
 let img = createHTMLStruct("img");
+let h1 = createHTMLStruct("h1");
+let h2 = createHTMLStruct("h2");
+let h3 = createHTMLStruct("h3");
+let h4 = createHTMLStruct("h4");
+let h5 = createHTMLStruct("h5");
+let h6 = createHTMLStruct("h6");
+let table = createHTMLStruct("table");
+let tr = createHTMLStruct("tr");
+let td = createHTMLStruct("td");
+let b = createHTMLStruct("b");
+let i = createHTMLStruct("i");
 
 let src = createAttributeStruct("src");
+let ariaHidden = createAttributeStruct("aria-hidden");
 
 import io;
 import system;
