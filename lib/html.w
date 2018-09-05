@@ -26,13 +26,8 @@ let createAttributeStruct => (name) {
 
 let createHTMLStruct => (tagName) {
 	struct structz => (styles, content, id, attributes) [build];
-	structz.init => (styles = [], content = "", uniqueId = none, attributes = []) {
-		if uniqueId == none {
-			this.id = tagName + globalID;
-			inc globalID;
-		}
-		else
-			this.id = uniqueId;
+	structz.init => (content = "", styles = [], uniqueId = none, attributes = []) {
+		this.id = uniqueId;
 
 		this.styles = styles;
 		this.content = content;
@@ -41,12 +36,17 @@ let createHTMLStruct => (tagName) {
 	};
 
 	structz.build => (context) {
-		let tag = "<" + tagName + ":" + this.id + ">";
+		let possibleId = this.id;
+		if possibleId == none {
+			possibleId = tagName + globalID;
+			inc globalID;
+		}
+		let tag = "<" + tagName + ":" + possibleId + ">";
 		"Building CSS for " + tag;
 
-		if !(this.id ~ context.alreadyGeneratedCss) and this.styles.size > 0{
-			context.alreadyGeneratedCss += this.id;
-			context.css += "." + this.id + " {\n";
+		if !(possibleId ~ context.alreadyGeneratedCss) and this.styles.size > 0{
+			context.alreadyGeneratedCss += possibleId;
+			context.css += "." + possibleId + " {\n";
 			for style in this.styles
 				// Automatically append semi-colon too!
 				context.css += "\t" + style + ";\n";
@@ -59,9 +59,12 @@ let createHTMLStruct => (tagName) {
 			attributesString += " " + attribute.generateString();
 
 		let indentation = context.indentation * "\t";
-		let front = "<" + tagName +
-			" class='" + this.id + "'" +
-			" id='" + this.id + "'" +
+		let identification = "";
+		if this.styles.size > 0 or this.id != none {
+			identification = " class='" + possibleId + "'" +
+			" id='" + possibleId + "'";
+		}
+		let front = "<" + tagName + identification +
 			attributesString + ">";
 
 		let back = "</" + tagName + ">";
@@ -94,12 +97,8 @@ html.build => (context) {
 	context.html += "<html>\n";
 	context.html += "<head>\n";
 	context.html += "	<title>" + this.title + "</title>\n";
-	for script in this.scripts
-		context.html +=
-			"	<script type='text/javascript' src='" + script + "' />\n";
 	for style in this.stylesheets
-		context.html +=
-			"	<link rel='stylesheet' type='text/css' href='" + style + "' />\n";
+		context.html += "	<link rel='stylesheet' type='text/css' href='" + style + "' />\n";
 	context.html +=
 		"	<link rel='stylesheet' type='text/css' href='" + context.stub + ".css' />\n";
 	context.html += "</head>\n";
@@ -108,6 +107,8 @@ html.build => (context) {
 	for c in this.content
 		c.build(context);
 	dec context.indentation;
+	for script in this.scripts
+		context.html += "<script src='" + script + "'></script>\n";
 	context.html += "</body>\n";
 	context.html += "</html>\n";
 };
@@ -127,8 +128,20 @@ let tr = createHTMLStruct("tr");
 let td = createHTMLStruct("td");
 let b = createHTMLStruct("b");
 let i = createHTMLStruct("i");
+let a = createHTMLStruct("a");
+struct br => [build];
+br.build => (context) {
+	context.html += "<br>\n";
+};
+
+// Text Node
+struct text => (text) [build];
+text.build => (context) {
+	context.html += this.text;
+};
 
 let src = createAttributeStruct("src");
+let href = createAttributeStruct("href");
 let ariaHidden = createAttributeStruct("aria-hidden");
 
 import io;

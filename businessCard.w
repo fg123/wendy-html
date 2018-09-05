@@ -57,30 +57,35 @@ let cardInfo => (name, skills, items) div(
 						"font-size: 13px",
 						"color: #888"
 					],
-					content = [
-						i(content=skills),
-						table(
-							uniqueId = "portfolio-description",
-							content = map(#:(item)
-								tr(
+					content = i(content=skills)
+				),
+				table(
+					uniqueId = "portfolio-description",
+					styles = [
+						"margin-top: 10px"
+					],
+					content = map(#:(item)
+						tr(
+							content = [
+								td(
+									uniqueId = "icon-wrapper",
+									styles = [
+										"text-align: center"
+									],
 									content = [
-										td(
-											content = [
-												i(
-													uniqueId = item.icon,
-													attributes = [
-														ariaHidden("true")
-													]
-												)
+										i(
+											uniqueId = item.icon,
+											attributes = [
+												ariaHidden("true")
 											]
-										),
-										td(
-											content = item.value
 										)
 									]
-								), items)
-						)
-					]
+								),
+								td(
+									content = item.value
+								)
+							]
+						), items)
 				)
 			]
 		)
@@ -89,21 +94,53 @@ let cardInfo => (name, skills, items) div(
 
 struct CardEntry => (icon, value);
 
-let businessCard => (name, portraitPicture, skills, items) div(
-	uniqueId = "businessCard",
+let header => (items) div(
+	uniqueId = "header-links",
 	styles = [
-		"display: table",
-		"background: #fff",
-		"width: 700px",
-		"height: auto",
-		"padding: 20px",
-		"position: absolute",
-		"top: 50%",
-		"left: 50%",
-		"transform: translate(-50%, -50%)",
-		"box-shadow: 0px 0px 20px 1px #000",
-		"border-radius: 5px",
-		"z-index: 500"
+		"text-align: right",
+		"vertical-align: middle",
+		"white-space: nowrap",
+		"display: none"
 	],
-	content = [portrait(portraitPicture), cardInfo(name, skills, items)]
-);
+	content = p(
+		uniqueId = "header-links-inner",
+		styles = [
+			"margin: 0px"
+		],
+		content = map(#:(item) span(
+			uniqueId = "header-link-wrapper",
+			styles = [
+				"padding: 5px"
+			],
+			content = item
+		), items)
+	)
+)
+
+let generateBusinessCard => (name, portraitPicture, skills, cardItems, headerItems)
+	div(
+		uniqueId = "business-card",
+		styles = [
+			"display: table",
+			"background: #fff",
+			"width: 700px",
+			"height: auto",
+			"padding: 20px",
+			"position: absolute",
+			"top: 50%",
+			"left: 50%",
+			"transform: translate(-50%, -50%)",
+			"box-shadow: 0px 0px 20px 1px #000",
+			"border-radius: 5px",
+			"z-index: 500"
+		],
+		content = [
+			portrait(portraitPicture),
+			cardInfo(name, skills, cardItems),
+			header(headerItems),
+			div(
+				uniqueId = "dummy-table-element",
+				content = "&nbsp;"
+			)
+		]
+	);
