@@ -94,28 +94,38 @@ let cardInfo => (name, skills, items) div(
 
 struct CardEntry => (icon, value);
 
-let header => (items) div(
-	uniqueId = "header-links",
-	styles = [
-		"text-align: right",
-		"vertical-align: middle",
-		"white-space: nowrap",
-		"display: none"
-	],
-	content = p(
-		uniqueId = "header-links-inner",
+let header => (items) {
+	items[items.size - 1].styles += [
+		"border-radius: 5px",
+		"color: #fff",
+		"width: 100px",
+		"text-align: center",
+		"background-color: #5f89fb"
+	];
+	items[items.size - 1].id = "blue-btn";
+	ret div(
+		uniqueId = "header-links",
 		styles = [
-			"margin: 0px"
+			"text-align: right",
+			"vertical-align: middle",
+			"white-space: nowrap",
+			"display: none"
 		],
-		content = map(#:(item) span(
-			uniqueId = "header-link-wrapper",
+		content = p(
+			uniqueId = "header-links-inner",
 			styles = [
-				"padding: 5px"
+				"margin: 0px"
 			],
-			content = item
-		), items)
+			content = map(#:(item) span(
+				uniqueId = "header-link-wrapper",
+				styles = [
+					"padding: 5px"
+				],
+				content = item
+			), items)
+		)
 	)
-)
+}
 
 let generateBusinessCard => (name, portraitPicture, skills, cardItems, headerItems)
 	div(

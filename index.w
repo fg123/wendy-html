@@ -40,28 +40,43 @@ let headerLinks = [
 	headerLink("#tech-specs", "Overview"),
 	headerLink("#tech-specs", "Experience"),
 	headerLink("#tech-specs", "Portfolio"),
-	a(
-		uniqueId = "blue-btn",
-		content = "Contact",
-		styles = [
-			"border-radius: 5px",
-			"color: #fff",
-			"width: 100px",
-			"text-align: center",
-			"background-color: #5f89fb"
-		],
-		attributes = [href("#tech-specs")]
-	)
+	headerLink("#contact", "Contact")
 ];
 
 let timelineItems = [
-	TimelineItem("Inkpad Studios", "Nov 2014 - June 2016", "corners/inkpad-tr.png", [
-		text("Developed from ground up a fun Android game called Pedal Panic "),
-		a(attributes = [href("https://play.google.com/store/apps/details?id=ca.inkpadstudios.pedalpanic&hl=en")]),
-		text(" using"), b("Unity"), text(" and "), b("C#"), text(".")
-	]),
-	TimelineItem("Yahoo! Inc", "May - Aug 2017", "corners/yahoo-tr.png",
-	formatted("Worked on creating custom *Android* folding animations for new advertisement layouts using /Java/."))
+	TimelineItem(
+		"Inkpad Studios",
+		"Nov 2014 - June 2016",
+		"corners/inkpad-tr.png",
+		[
+			text("Developed from ground up a fun Android game called "),
+			a("Pedal Panic", attributes = [href("https://play.google.com/store/apps/details?id=ca.inkpadstudios.pedalpanic&hl=en")]),
+			formatted(" using *Unity* and *C#*.")
+		]
+	),
+	TimelineItem(
+		"Yahoo! Inc.",
+		"May - Aug 2017",
+		"corners/yahoo-tr.png",
+		formatted("Worked on creating custom *Android* folding animations for new advertisement layouts using *Java*.")
+	),
+	TimelineItem(
+		"Oath Inc.",
+		"Jan - Apr 2018",
+		"corners/oath.png",
+		formatted(
+			"Architected and implemented a complex UI flow for Creating Contests and Leagues for Yahoo Fantasy Sports Android. All new source code was written and developed in *Kotlin*."
+		)
+	),
+	TimelineItem(
+		"Google LLC.",
+		"May - Aug 2018",
+		"corners/google-tr.png",
+		formatted(
+			"Worked on building and launching a unit-testing framework for the Linux Kernel, writing the framework in *C* and accompanying scripts in *Python*."
+		)
+	)
+
 ];
 
 let businessCard = generateBusinessCard(name, portraitUrl, skills, cardItems, headerLinks);

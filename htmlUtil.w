@@ -18,17 +18,21 @@ formatted.build => (context) {
 			if i == "\\" {
 				shouldIgnoreNext = true;
 			} else {
+				// This logic here is very bad because Wendy has no short
+				// circuiting...
+				let ended = false;
 				if (!tokenStack.empty()) {
 					if i ~ tokens and tokenStack.top() == i {
 						tokenStack.pop();
 						context.html += "</" + replacements[indexOf(tokens, i)] + ">";
+						ended = true;
 					}
 				}
-				if i ~ tokens {
+				if i ~ tokens and !ended {
 					tokenStack.push(i);
 					context.html += "<" + replacements[indexOf(tokens, i)] + ">";
 				}
-				else
+				else if ! (i ~ tokens)
 					context.html += i;
 			}
 		} else {
