@@ -11,16 +11,15 @@ let topOffset = card.offsetTop - cardHeight / 2;
 let wrapperHeight = wrapper.clientHeight;
 
 window.addEventListener('resize', function() {
-    card.style.top = '';
-    card.style.left = '';
-    card.style.position = '';
-    card.style.transform = 'translate(-50%, -50%)';
+    onUserScrolled(0);
+    wrapperHeight = wrapper.clientHeight;
+    cardHeight = card.clientHeight;
     topOffset = card.offsetTop - cardHeight / 2;
-    onUserScrolled();
+    onUserScrolled(window.pageYOffset || document.documentElement.scrollTop);
 });
 
 window.addEventListener('scroll', function() {
-    onUserScrolled();
+    onUserScrolled(window.pageYOffset || document.documentElement.scrollTop);
 });
 const STATE_CARD = 'business-card';
 const STATE_HEADER = 'header';
@@ -32,8 +31,7 @@ function iterate(start, end, p) {
 }
 
 
-function onUserScrolled() {
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+function onUserScrolled(scrollPosition) {
     const start = topOffset;
     const end = (window.innerHeight + start) / 2;
     const mid = (end + start) / 2;
@@ -48,20 +46,21 @@ function onUserScrolled() {
     let secondHalf = calcPercent(mid, end);
     // Only the second half of the top half scroll counts from 0 -> 1 percent
     const cardTop = card.getBoundingClientRect().top;
-    portrait.style.width = iterate(220, 48, firstHalf) + 'px';
-    portrait.style.height = iterate(220, 48, firstHalf) + 'px';
+    portrait.style.width = iterate(235, 48, firstHalf) + 'px';
+    portrait.style.height = iterate(235, 48, firstHalf) + 'px';
     title.style['font-size'] = iterate(48, 40, firstHalf) + 'px';
     card.style['border-radius'] = iterate(5, 0, firstHalf) + 'px';
-    card.style.width = iterate(700, document.body.scrollWidth, firstHalf) + 'px';
+    card.style['max-width'] = iterate(700, document.body.scrollWidth, firstHalf) + 'px';
+    card.style['width'] = "calc(100% - " + iterate(80, 0, firstHalf) + 'px)';
     wrapper.style.height = iterate(wrapperHeight, 0, firstHalf) + 'px';
     dummyCell.style.width = iterate(0, 400, firstHalf) + 'px';
     headerLinks.style.transform = 'translate(' + iterate(100, 0, secondHalf) + '%, 0%)';
     if (scrollPosition > mid) {
-        headerLinks.style.display = 'table-cell';
+        headerLinks.style.display = 'block';
         dummyCell.style.display = 'none';
     } else {
         headerLinks.style.display = 'none';
-        dummyCell.style.display = 'table-cell';
+        dummyCell.style.display = 'block';
     }
     if (scrollPosition < start) {
         card.style.top = '';

@@ -36,3 +36,10 @@ a.anchor {
     top: -100px;
     visibility: hidden;
 }
+
+/* Media Overrides */
+@media screen and (max-width: 791px) {
+    .title, .subnote {
+        text-align: center;
+    }
+}

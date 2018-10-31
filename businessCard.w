@@ -2,38 +2,34 @@ import html;
 import list;
 
 let portrait => (portraitPicture) div(
-	styles = [
-		"display: table-cell",
-		"vertical-align: baseline"
-	],
-	content = div(
-		uniqueId = "portrait",
-		styles = [
-			"width: 220px",
-			"height: 220px",
-			"overflow: hidden",
-			"display: inline-block",
-			"margin-right: 20px"
-		],
-		content = img(
-			styles = [
-				"height: inherit",
-				"width: inherit",
-				"object-fit: cover",
-				"border-radius: 10px"
-			],
-			attributes = [
-				src(portraitPicture)
-			]
-		)
-	)
+    uniqueId = "portrait",
+    styles = [
+        "width: 235px",
+        "height: 235px",
+        "overflow: hidden",
+        "display: inline-block",
+        "margin-left: auto",
+        "margin-right: auto"
+    ],
+    content = img(
+        styles = [
+            "height: inherit",
+            "width: inherit",
+            "object-fit: cover",
+            "border-radius: 10px"
+        ],
+        attributes = [
+            src(portraitPicture)
+        ]
+    )
 );
 
 let cardInfo => (name, skills, items) div(
-	styles = [
-		"display: table-cell",
-		"vertical-align: top"
-	],
+    styles = [
+        "flex-grow: 1",
+        "padding-left: 15px",
+        "padding-right: 15px"
+    ],
 	content = [
 		h1(
             uniqueId = "title",
@@ -102,6 +98,8 @@ let header => (items) {
 			"text-align: right",
 			"vertical-align: middle",
 			"white-space: nowrap",
+            "margin-left: auto",
+            "margin-right: auto",
 			"display: none"
 		],
 		content = p(
@@ -124,9 +122,13 @@ let generateBusinessCard => (name, portraitPicture, skills, cardItems, headerIte
 	div(
 		uniqueId = "business-card",
 		styles = [
-			"display: table",
+			"display: flex",
+            "flex-flow: wrap",
+			"justify-content: space-between",
+			"align-items: center",
 			"background: #FDFDFD",
-			"width: 700px",
+			"width: calc(100% - 80px)",
+            "max-width: 700px",
 			"height: auto",
 			"padding: 20px",
 			"position: absolute",
