@@ -20,7 +20,7 @@ let portfolioWindow => (portfolioItem) {
         uniqueId = "portfolioWindow",
         styles = [
             "padding-top: 20px",
-            "width: 100%",
+            "width: calc(100% - 20px)",
             "max-width: 435px",
             "border: 4px solid #f2f2f2",
             "border-radius: 5px",
