@@ -23,7 +23,7 @@ let contactInfo = div(
     styles = [
         "display: flex",
         "justify-content: space-between",
-        "font-size: 20px",
+        "font-size: 16px",
         cssAppend(
             " a", ["color: #FDFDFD", "text-decoration: none"]
         )

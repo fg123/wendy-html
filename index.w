@@ -201,13 +201,7 @@ let footer = div(
             " a", ["color: #FDFDFD", "text-decoration: none"]
         )
     ],
-    content = [text("Copyright &copy; Felix Guo 2018"),
-    br(),
-    inline([
-        text("Compiled with WendyHTML - "),
-        a("github.com/fg123/wendy-html",
-            attributes = [href("https://github.com/fg123/wendy-html")])
-    ])]
+    content = "Copyright &copy; Felix Guo 2018"
 )
 let sections = [
 	generateSection("overview", true, false, [businessCard, moreInfoArrow], [
