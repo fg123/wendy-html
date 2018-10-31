@@ -9,10 +9,13 @@ const title = document.getElementById('title');
 let cardHeight = card.clientHeight;
 let topOffset = card.offsetTop - cardHeight / 2;
 let wrapperHeight = wrapper.clientHeight;
+
 window.addEventListener('resize', function() {
-    cardHeight = card.clientHeight;
+    card.style.top = '';
+    card.style.left = '';
+    card.style.position = '';
+    card.style.transform = 'translate(-50%, -50%)';
     topOffset = card.offsetTop - cardHeight / 2;
-    wrapperHeight = wrapper.clientHeight;
     onUserScrolled();
 });
 

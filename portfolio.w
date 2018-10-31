@@ -20,7 +20,8 @@ let portfolioWindow => (portfolioItem) {
         uniqueId = "portfolioWindow",
         styles = [
             "padding-top: 20px",
-            "width: 435px",
+            "width: 100%",
+            "max-width: 435px",
             "border: 4px solid #f2f2f2",
             "border-radius: 5px",
             "box-shadow: 0 2px 4px #292929",
@@ -124,7 +125,7 @@ let portfolioRow => (parts) div(
     uniqueId = "portfolioRow",
     styles = [
         "display: grid",
-        "grid-template-columns: repeat(auto-fit, 450px)",
+        "grid-template-columns: repeat(auto-fit, minmax(auto, 450px))",
         "justify-content: center"
     ],
     content = parts

@@ -196,6 +196,7 @@ let footer = div(
         "text-align: center",
         "color: #FDFDFD",
         "padding-top: 80px",
+        "font-size: 14px",
         cssAppend(
             " a", ["color: #FDFDFD", "text-decoration: none"]
         )
