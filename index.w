@@ -235,6 +235,11 @@ generate(
 			"https://use.fontawesome.com/releases/v5.4.2/css/all.css",
 			"timeline.css"
 		],
+        metas = [
+            meta("viewport", "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"),
+            meta("description", "Felix Guo is a Computer Science and Business student at the University of Waterloo."),
+	        meta("author", "Felix Guo")
+        ],
         favicon = "icon.png",
 		scripts = [
             "zenscroll-min.js",

@@ -148,15 +148,20 @@ let createHTMLStruct => (tagName) {
 	ret structz;
 };
 
-struct html => (title, stylesheets, favicon, scripts, content) [build];
+struct meta => (name, content);
+struct html => (title, stylesheets, metas, favicon, scripts, content) [build];
 
 html.build => (context) {
 	"Building <html>";
 	context.html += "<!-- Generated with WendyHTML -->\n";
+    context.html += "<!-- https://github.com/fg123/wendy-html -->\n";
 	context.html += "<!DOCTYPE HTML>\n";
 	context.html += "<html>\n";
 	context.html += "<head>\n";
-	context.html += "	<title>" + this.title + "</title>\n";
+	context.html += "    <title>" + this.title + "</title>\n";
+    context.html += "    <meta charset='utf-8'>";
+    for m in this.metas
+        context.html += "   <meta name='" + m.name + "' content='" + m.content + "'>";
 	context.html += "	<link rel='icon' type='image/png' href='" + this.favicon + "'>\n";
 	for style in this.stylesheets
 		context.html += "	<link rel='stylesheet' type='text/css' href='" + style + "' />\n";

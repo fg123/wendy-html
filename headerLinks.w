@@ -17,8 +17,7 @@ let headerLink => (loc, c) a(
 		"border-radius: 20px",
 		"color: #333",
         cssAppend(".active", [
-            "box-shadow: 0 0 15px #666666",
-            "background-color: #F3F3F3"
+            "box-shadow: 0 0 15px #666666"
         ]),
         cssAppend(".active:hover", [
             "text-decoration: none",
