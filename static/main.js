@@ -28,6 +28,7 @@ function iterate(start, end, p) {
     return start + (end - start) * p;
 }
 
+
 function onUserScrolled() {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     const start = topOffset;
@@ -44,8 +45,9 @@ function onUserScrolled() {
     let secondHalf = calcPercent(mid, end);
     // Only the second half of the top half scroll counts from 0 -> 1 percent
     const cardTop = card.getBoundingClientRect().top;
-    portrait.style.width = iterate(220, 64, firstHalf) + 'px';
-    portrait.style.height = iterate(220, 64, firstHalf) + 'px';
+    portrait.style.width = iterate(220, 48, firstHalf) + 'px';
+    portrait.style.height = iterate(220, 48, firstHalf) + 'px';
+    title.style['font-size'] = iterate(48, 40, firstHalf) + 'px';
     card.style['border-radius'] = iterate(5, 0, firstHalf) + 'px';
     card.style.width = iterate(700, document.body.scrollWidth, firstHalf) + 'px';
     wrapper.style.height = iterate(wrapperHeight, 0, firstHalf) + 'px';
@@ -70,5 +72,23 @@ function onUserScrolled() {
         card.style.position = 'fixed';
         card.style.transform = 'translate(-50%, 0%)';
         previousState = STATE_HEADER;
+    }
+
+    determineAnchorActive(scrollPosition);
+}
+
+const anchorLinks = Array.from(document.querySelectorAll('a.header-link'));
+const anchors = Array.from(document.querySelectorAll('a.anchor')).slice(0, anchorLinks.length);
+let activeIndex = 0;
+
+function determineAnchorActive(scrollPosition) {
+    const newIndex = anchors.findIndex(function(element) {
+        const rect = element.getBoundingClientRect();
+        return (rect.top > - 200 - window.innerHeight / 2);
+    });
+    if (newIndex > -1) {
+        anchorLinks[activeIndex].classList.remove('active');
+        anchorLinks[newIndex].classList.add('active');
+        activeIndex = newIndex;
     }
 }

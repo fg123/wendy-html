@@ -18,9 +18,9 @@ TimelineContainer.build => (context) {
 				<div class='container " + leftOrRight + "'>
 					<div class='content'>
 						<img src='" + item.icon + "'>
-						<h2>" + item.title + "</h2>
+						<h2 style='margin-bottom: 10px'>" + item.title + "</h2>
 						<b>" + item.date + "</b>
-						<p>";
+						<p style='margin-top: 10px'>";
 		if (item.content.type == <list>)
 			for c in item.content
 				c.build(context);

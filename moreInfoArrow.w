@@ -13,13 +13,13 @@ let moreInfoArrow = div(
 		"width: 100px",
 		"text-transform: uppercase",
 		"z-index: 5",
-		"color: #fff"
+		"color: #FDFDFD"
 	],
 	content = [
 		text("More Info"),
 		br(),
 		i(
-			uniqueId = "fa fa-chevron-down fa-fw animated bounce",
+			uniqueId = "fa fa-chevron-down fa-fw",
 			attributes = [
 				ariaHidden("true")
 			]

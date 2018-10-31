@@ -36,13 +36,14 @@ let cardInfo => (name, skills, items) div(
 	],
 	content = [
 		h1(
+            uniqueId = "title",
 			styles = [
 				"font-family: 'Roboto Slab', serif",
 				"font-size: 48px",
-				"letter-spacing: 3px",
+				// "letter-spacing: 3px",
 				"color: #212121",
 				"font-weight: bold",
-				"text-transform: uppercase",
+				// "text-transform: uppercase",
 				"margin: 0px"
 			],
 			content = name
@@ -54,7 +55,7 @@ let cardInfo => (name, skills, items) div(
 				div(
 					uniqueId = "subnote",
 					styles = [
-						"font-size: 13px",
+						"font-size: 14px",
 						"color: #888"
 					],
 					content = i(content=skills)
@@ -62,7 +63,7 @@ let cardInfo => (name, skills, items) div(
 				table(
 					uniqueId = "portfolio-description",
 					styles = [
-						"margin-top: 10px"
+						"margin-top: 5px"
 					],
 					content = map(#:(item)
 						tr(
@@ -95,14 +96,6 @@ let cardInfo => (name, skills, items) div(
 struct CardEntry => (icon, value);
 
 let header => (items) {
-	items[items.size - 1].styles += [
-		"border-radius: 5px",
-		"color: #fff",
-		"width: 100px",
-		"text-align: center",
-		"background-color: #5f89fb"
-	];
-	items[items.size - 1].id = "blue-btn";
 	ret div(
 		uniqueId = "header-links",
 		styles = [
@@ -132,7 +125,7 @@ let generateBusinessCard => (name, portraitPicture, skills, cardItems, headerIte
 		uniqueId = "business-card",
 		styles = [
 			"display: table",
-			"background: #fff",
+			"background: #FDFDFD",
 			"width: 700px",
 			"height: auto",
 			"padding: 20px",

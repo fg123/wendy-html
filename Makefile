@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 all: index.w businessCard.wc html.wc headerLinks.wc section.wc \
-moreInfoArrow.wc timeline.wc htmlUtil.wc
+moreInfoArrow.wc timeline.wc htmlUtil.wc portfolio.wc contact.wc
 	wendy index.w
 	cp -uR static/* gen/
 

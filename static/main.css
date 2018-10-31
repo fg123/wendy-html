@@ -8,6 +8,7 @@ body {
     position: relative;
     height: 100%;
     font-family: 'Varela Round', sans-serif;
+    scroll-behavior: smooth;
 }
 
 h1,
@@ -27,4 +28,11 @@ a {
 a:hover {
     text-decoration: underline;
     color: #275d8c;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -100px;
+    visibility: hidden;
 }

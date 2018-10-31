@@ -1,3 +1,4 @@
+import data;
 import html;
 import businessCard;
 import section;
@@ -6,9 +7,11 @@ import headerLinks;
 import moreInfoArrow;
 import timeline;
 import htmlUtil;
+import portfolio;
+import contact;
 
-let googleFont => (fontName) {
-	fontName = (fontName / " ") % "+";
+let googleFont => (/* var args */) {
+	let fontName = ((arguments % "|") / " ") % "+";
 	ret "//fonts.googleapis.com/css?family=" + fontName;
 };
 
@@ -37,28 +40,28 @@ let cardItems = [
 ];
 
 let headerLinks = [
-	headerLink("#tech-specs", "Overview"),
-	headerLink("#tech-specs", "Experience"),
-	headerLink("#tech-specs", "Portfolio"),
-	headerLink("#contact", "Contact")
+	headerLink("#overview", "Overview"),
+	headerLink("#experience", "Experience"),
+	headerLink("#portfolio", "Portfolio"),
+	blueHeaderLink("#contact", "Contact")
 ];
 
 let timelineItems = [
 	TimelineItem(
-		"Inkpad Studios",
-		"Nov 2014 - June 2016",
-		"corners/inkpad-tr.png",
-		[
-			text("Developed from ground up a fun Android game called "),
-			a("Pedal Panic", attributes = [href("https://play.google.com/store/apps/details?id=ca.inkpadstudios.pedalpanic&hl=en")]),
-			formatted(" using *Unity* and *C#*.")
-		]
+		"Your Company",
+		"Sept - Dec 2019",
+		"corners/question.png",
+        formatted("This could be *you*!")
 	),
 	TimelineItem(
-		"Yahoo! Inc.",
-		"May - Aug 2017",
-		"corners/yahoo-tr.png",
-		formatted("Worked on creating custom *Android* folding animations for new advertisement layouts using *Java*.")
+		"Google LLC.",
+		"May - Aug 2018",
+		"corners/google-tr.png",
+        inline([
+            text("Worked on building and launching a unit-testing framework for the Linux Kernel, "),
+            a("KUnit", attributes=[href("https://kunit.googlesource.com/")]),
+            formatted(", writing the framework in *C* and accompanying scripts in *Python*.")
+        ])
 	),
 	TimelineItem(
 		"Oath Inc.",
@@ -68,39 +71,158 @@ let timelineItems = [
 			"Architected and implemented a complex UI flow for Creating Contests and Leagues for Yahoo Fantasy Sports Android. All new source code was written and developed in *Kotlin*."
 		)
 	),
-	TimelineItem(
-		"Google LLC.",
-		"May - Aug 2018",
-		"corners/google-tr.png",
-		formatted(
-			"Worked on building and launching a unit-testing framework for the Linux Kernel, writing the framework in *C* and accompanying scripts in *Python*."
-		)
+    TimelineItem(
+		"Yahoo! Inc.",
+		"May - Aug 2017",
+		"corners/yahoo-tr.png",
+		formatted("Worked on creating custom *Android* folding animations for new advertisement layouts using *Java*.")
+	),
+    TimelineItem(
+		"Inkpad Studios",
+		"Nov 2014 - June 2016",
+		"corners/inkpad-tr.png",
+		[
+			text("Developed from ground up a fun Android game called "),
+			a("Pedal Panic", attributes = [href("https://play.google.com/store/apps/details?id=ca.inkpadstudios.pedalpanic&hl=en")]),
+			formatted(" using *Unity* and *C#*.")
+		]
 	)
-
 ];
 
 let businessCard = generateBusinessCard(name, portraitUrl, skills, cardItems, headerLinks);
-struct sectionHeader => (text) [build];
+struct sectionHeader => (text, color) [build];
+sectionHeader.init => (text, color = "#FDFDFD") {
+    this.text = text;
+    this.color = color;
+    ret this;
+};
+
 sectionHeader.build => (context) {
-	h1(uniqueId = "section-header",
+	h1(uniqueId = "section-header" + this.color[1->this.color.size],
 		content = this.text,
 		styles = [
 			"margin-left: auto",
 			"margin-right: auto",
 			"text-align: center",
-			"color: #fff"
+			"color: " + this.color
 		]).build(context);
 };
 
+let portfolioItems = [
+    PortfolioItem(
+        "wendyScript.png",
+        "WendyScript",
+        [
+            text("Programming Language | "),
+            a("Documentation", attributes = [href("http://felixguo.me/wendy")])
+        ],
+        "WendyScript is a dynamically typed imperative programming language.
+        Information about the syntax and download for the compiler can be found in the documentation.",
+        ["C"]
+    ),
+    PortfolioItem(
+        "mercuryWm.png",
+        "Mercury WM",
+        [
+            text("Chrome Extension | "),
+            a("Github", attributes = [href("https://github.com/wheel-org/mercurywm")])
+        ],
+        "Mercury replaces the new-tab page with a fully functioning tiling window manager, backed by a JS operating system.
+        It allows users to create panels displaying relevant information, and customize the new tab page into any layout.",
+        ["HTML5", "CSS", "Javascript", "React", "Redux"]
+    ),
+    PortfolioItem(
+        "lumenAstrum.png",
+        "Lumen Astrum",
+        [
+            text("Work in Progress | "),
+            a("Github", attributes = [href("https://github.com/fg123/lumen-astrum-js")])
+        ],
+        "Lumen Astrum is a turn-based real-time strategy game where you
+        control your units to battle against an enemy. Defend your command
+        center by building structures to create units and upgrade stats.",
+        ["Javascript"]
+    ),
+      PortfolioItem(
+        "tetris.png",
+        "Tetris (with friends)",
+        [
+            text("Online Tetris Game | "),
+            a("Github", attributes = [href("https://github.com/fg123/tetris")])
+        ],
+        [
+            text("Recreation of the Tetris Friends Facebook game but with no
+            ads and is quick to setup. More information can be found on the Github
+            page.")
+        ],
+        ["HTML5", "PHP", "CSS", "Javascript", "MySQL"]
+    ),
+    PortfolioItem(
+        "comePlayForMe.png",
+        "Come Play For Me",
+        [
+            text("Freelance Project | "),
+            a("https://comeplayforme.com/", attributes = [href("https://comeplayforme.com/")])
+        ],
+        "A freelance website project for a private piano teacher in Vancouver.
+        I also created a backend panel system for her to easily change all the content on the website.",
+        ["HTML5", "PHP", "CSS", "Javascript", "MySQL"]
+    ),
+    PortfolioItem(
+        "pedalPanic.png",
+        "Pedal Panic: Sky Dash Run",
+        [
+            text("Lead Developer | "),
+            a("Google Play Link", attributes = [href("https://play.google.com/store/apps/details?id=ca.inkpadstudios.pedalpanic")])
+        ],
+        [
+            text("Pedal Panic is a quirky take at a basic concept.
+            The player must control the character on a unicycle high above the
+            skies by tilting the phone to keep the character on the planks.
+            As the time goes on, the game accelerates and a variety of obstacles
+            and beams are presented to the player that they must overcome."),
+            portfolioTagLine(inline([
+                text("Created with "),
+                a("Inkpad Studios", attributes = [href("https://inkpadstudios.ca/")])
+            ]))
+        ],
+        ["HTML5", "PHP", "CSS", "Javascript", "MySQL"]
+    )
+];
+
+let footer = div(
+    uniqueId = "footer",
+    styles = [
+        "text-align: center",
+        "color: #FDFDFD",
+        "padding-top: 80px",
+        cssAppend(
+            " a", ["color: #FDFDFD", "text-decoration: none"]
+        )
+    ],
+    content = [text("Copyright &copy; Felix Guo 2018"),
+    br(),
+    inline([
+        text("Compiled with WendyHTML - "),
+        a("github.com/fg123/wendy-html",
+            attributes = [href("https://github.com/fg123/wendy-html")])
+    ])]
+)
 let sections = [
-	generateSection(true, false, [businessCard, moreInfoArrow], [
+	generateSection("overview", true, false, [businessCard, moreInfoArrow], [
 		"background: url(vancouver.jpg) no-repeat center center",
-		"background-size: cover;"
+		"background-size: cover"
 	]),
-	generateSection(false, true, [sectionHeader("Experience"), generateTimeline(timelineItems)], [
+	generateSection("experience", false, true, [sectionHeader("Experience"), generateTimeline(timelineItems)], [
 		"background: url(googleBuilding.jpg) no-repeat center center",
-		"background-size: cover;"
-	])
+		"background-size: cover"
+	]),
+    generateSection("portfolio", false, true, [sectionHeader("Portfolio", "#000"), generatePortfolio(portfolioItems)], [
+        "background: url(lightBackground.png) repeat"
+    ]),
+    generateSection("contact", false, true, [sectionHeader("Contact"), contactInfo, footer],[
+        "background: #333"
+    ])
 ];
 
 generate(
@@ -108,18 +230,17 @@ generate(
 	html(
 		title = name,
 		stylesheets = [
-			googleFont("Roboto Slab"),
-			googleFont("Nunito Sans"),
-			googleFont("Varela Round"),
-			googleFont("Raleway"),
+			googleFont("Roboto Slab", "Varela Round", "Raleway"),
 			"main.css",
-			"https://use.fontawesome.com/releases/v5.0.13/css/all.css",
-			"animate.min.css",
+			"https://use.fontawesome.com/releases/v5.4.2/css/all.css",
 			"timeline.css"
 		],
+        favicon = "icon.png",
 		scripts = [
+            "zenscroll-min.js",
 			"main.js"
 		],
 		content = sections
-	)
+	),
+    minify = false
 );
