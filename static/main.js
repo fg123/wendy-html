@@ -21,6 +21,7 @@ window.addEventListener('resize', function() {
 window.addEventListener('scroll', function() {
     onUserScrolled(window.pageYOffset || document.documentElement.scrollTop);
 });
+
 const STATE_CARD = 'business-card';
 const STATE_HEADER = 'header';
 let previousState = STATE_CARD;
@@ -29,7 +30,6 @@ let previousState = STATE_CARD;
 function iterate(start, end, p) {
     return start + (end - start) * p;
 }
-
 
 function onUserScrolled(scrollPosition) {
     const start = topOffset;
@@ -55,12 +55,15 @@ function onUserScrolled(scrollPosition) {
     wrapper.style.height = iterate(wrapperHeight, 0, firstHalf) + 'px';
     dummyCell.style.width = iterate(0, 400, firstHalf) + 'px';
     headerLinks.style.transform = 'translate(' + iterate(100, 0, secondHalf) + '%, 0%)';
-    if (scrollPosition > mid) {
+    if (scrollPosition > mid && window.innerWidth >= 830) {
         headerLinks.style.display = 'block';
         dummyCell.style.display = 'none';
-    } else {
+    } else if (window.innerWidth >= 830) {
         headerLinks.style.display = 'none';
         dummyCell.style.display = 'block';
+    } else {
+        headerLinks.style.display = 'none';
+        dummyCell.style.display = 'none';
     }
     if (scrollPosition < start) {
         card.style.top = '';

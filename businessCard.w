@@ -6,6 +6,7 @@ let portrait => (portraitPicture) div(
     styles = [
         "width: 235px",
         "height: 235px",
+        "min-width: 48px",
         "overflow: hidden",
         "display: inline-block",
         "margin-left: auto",

@@ -24,7 +24,7 @@ let portfolioWindow => (portfolioItem) {
             "max-width: 435px",
             "border: 4px solid #f2f2f2",
             "border-radius: 5px",
-            "box-shadow: 0 2px 4px #292929",
+            "box-shadow: 0 1px 5px #292929",
             "background: #f2f2f2",
             "margin-bottom: 15px",
             "margin-left: auto",
@@ -36,7 +36,7 @@ let portfolioWindow => (portfolioItem) {
             cssAppend(":before", [
                 "content: ' \\25CF \\25CF \\25CF'",
                 "font-size: 22px",
-                "top: -3px",
+                "top: -5px",
                 "color: #3d3d3d",
                 "position: absolute",
                 "z-index: 100",

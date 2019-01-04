@@ -183,7 +183,7 @@ let portfolioItems = [
             and beams are presented to the player that they must overcome."),
             portfolioTagLine(inline([
                 text("Created with "),
-                a("Inkpad Studios", attributes = [href("https://inkpadstudios.ca/")])
+                a("Inkpad Studios", attributes = [href("https://www.inkpadstudios.ca/")])
             ]))
         ],
         ["HTML5", "PHP", "CSS", "Javascript", "MySQL"]
@@ -195,14 +195,22 @@ let footer = div(
     styles = [
         "text-align: center",
         "color: #FDFDFD",
-        "padding-top: 80px",
+        "padding-top: 20px",
         "font-size: 14px",
         cssAppend(
             " a", ["color: #FDFDFD", "text-decoration: none"]
         )
     ],
-    content = "Copyright &copy; Felix Guo 2018"
-)
+    content = "Copyright &copy; Felix Guo 2019"
+);
+
+let onClick = createAttributeStruct("onclick");
+
+moreInfoArrow.attributes += onClick('location.hash="#experience"');
+moreInfoArrow.styles += cssAppend(":hover", [
+    "cursor: pointer"
+]);
+
 let sections = [
 	generateSection("overview", true, false, [businessCard, moreInfoArrow], [
 		"background: url(vancouver.jpg) no-repeat center center",
@@ -215,7 +223,7 @@ let sections = [
     generateSection("portfolio", false, true, [sectionHeader("Portfolio", "#000"), generatePortfolio(portfolioItems)], [
         "background: url(lightBackground.png) repeat"
     ]),
-    generateSection("contact", false, true, [sectionHeader("Contact"), contactInfo, footer],[
+    generateSection("contact", false, true, [contactInfo, footer],[
         "background: #333"
     ])
 ];
